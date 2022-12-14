@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-
-class iconwidget extends StatelessWidget {
+class Iconwidget extends StatelessWidget {
   final IconData icon;
   final String label;
-  iconwidget({required this.icon, required this.label});
+
+  Iconwidget({required this.icon, required this.label});
 
   @override
   Widget build(BuildContext context) {

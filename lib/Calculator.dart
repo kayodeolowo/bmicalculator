@@ -1,19 +1,26 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'icon_widget.dart';
+import 'Icon_widget.dart';
 import 'reuseable_card.dart';
 
 const bottomcontainerheight = 70.0;
+const activeColor = Color.fromARGB(255, 64, 72, 221);
+const inactiveColor = Color(0xFF1D1E33);
+
+enum Gender {
+  male,
+  female,
+}
 
 class Calculator extends StatefulWidget {
-  const Calculator({Key? key}) : super(key: key);
-
   @override
   State<Calculator> createState() => _CalculatorState();
 }
 
 class _CalculatorState extends State<Calculator> {
+  Gender? selectedGender;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,24 +36,37 @@ class _CalculatorState extends State<Calculator> {
                 //gesture detector used in place of on pressed because g.d wont afect ui o button.
                 child: GestureDetector(
                   onTap: () {
-                    print("presses");
+                    setState(() {
+                      selectedGender = Gender.male;
+                    });
                   },
                   child: ReuseableCard(
-                    mycolor: Color.fromARGB(255, 113, 131, 15),
-                    cardChild: (iconwidget(
+                    mycolor: selectedGender == Gender.male
+                        ? activeColor
+                        : inactiveColor,
+                    cardChild: Iconwidget(
                       icon: FontAwesomeIcons.mars,
                       label: "MALE",
-                    )),
+                    ),
                   ),
                 ),
               ),
               Expanded(
-                child: ReuseableCard(
-                  mycolor: Color.fromARGB(255, 84, 91, 226),
-                  cardChild: (iconwidget(
-                    icon: FontAwesomeIcons.venus,
-                    label: "FEMALE",
-                  )),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedGender = Gender.female;
+                    });
+                  },
+                  child: ReuseableCard(
+                    mycolor: selectedGender == Gender.female
+                        ? activeColor
+                        : inactiveColor,
+                    cardChild: Iconwidget(
+                      icon: FontAwesomeIcons.venus,
+                      label: "FEMALE",
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -57,10 +77,10 @@ class _CalculatorState extends State<Calculator> {
         Expanded(
           child: ReuseableCard(
             mycolor: Colors.blueAccent,
-            cardChild: (iconwidget(
+            cardChild: Iconwidget(
               icon: FontAwesomeIcons.venus,
               label: "FEMALE",
-            )),
+            ),
           ),
         ),
 
