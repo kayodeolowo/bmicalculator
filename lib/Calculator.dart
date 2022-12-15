@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'Icon_widget.dart';
 import 'reuseable_card.dart';
-
-const bottomcontainerheight = 70.0;
-const activeColor = Color.fromARGB(255, 64, 72, 221);
-const inactiveColor = Color(0xFF1D1E33);
+import 'constants.dart';
 
 enum Gender {
   male,
@@ -42,8 +39,8 @@ class _CalculatorState extends State<Calculator> {
                   },
                   child: ReuseableCard(
                     mycolor: selectedGender == Gender.male
-                        ? activeColor
-                        : inactiveColor,
+                        ? kactiveColor
+                        : kinactiveColor,
                     cardChild: Iconwidget(
                       icon: FontAwesomeIcons.mars,
                       label: "MALE",
@@ -60,8 +57,8 @@ class _CalculatorState extends State<Calculator> {
                   },
                   child: ReuseableCard(
                     mycolor: selectedGender == Gender.female
-                        ? activeColor
-                        : inactiveColor,
+                        ? kactiveColor
+                        : kinactiveColor,
                     cardChild: Iconwidget(
                       icon: FontAwesomeIcons.venus,
                       label: "FEMALE",
@@ -76,12 +73,15 @@ class _CalculatorState extends State<Calculator> {
         //midlle card
         Expanded(
           child: ReuseableCard(
-            mycolor: Colors.blueAccent,
-            cardChild: Iconwidget(
-              icon: FontAwesomeIcons.venus,
-              label: "FEMALE",
-            ),
-          ),
+              mycolor: kinactiveColor,
+              cardChild: Column(
+                children: [
+                  Text(
+                    "HEIGHT",
+                    style: labelTextStyle,
+                  )
+                ],
+              )),
         ),
 
         Expanded(
@@ -90,7 +90,9 @@ class _CalculatorState extends State<Calculator> {
               Expanded(
                 child: ReuseableCard(
                   mycolor: Color(0xFF1D1E33),
-                  cardChild: (Column()),
+                  cardChild: (Column(
+                    children: [],
+                  )),
                 ),
               ),
               Expanded(
@@ -106,7 +108,7 @@ class _CalculatorState extends State<Calculator> {
           color: Colors.red,
           margin: EdgeInsets.only(top: 10),
           width: double.infinity,
-          height: bottomcontainerheight,
+          height: kbottomcontainerheight,
         )
       ]),
     );
